@@ -22,11 +22,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // pre-seeded phrase data
 var phrases =[
-  {id: 0, word: "spencer", definition: "cornelia"},
-  {id: 1, word: "spencer1", definition: "cornelia2"},
-  {id: 2, word: "spencer2", definition: "cornelia3"},
-  {id: 3, word: "spencer3", definition: "cornelia4"},
-  {id: 4, word: "spencer4", definition: "cornelia5"}
+  {id: 0, word: "word0", definition: "definition0"},
+  {id: 1, word: "word1", definition: "definition1"},
+  {id: 2, word: "word2", definition: "definition2"},
+  {id: 3, word: "word3", definition: "definition3"},
+  {id: 4, word: "word4", definition: "definition4"}
 ];
 
 // ROUTES //
@@ -44,10 +44,8 @@ app.get("/phrases", function (req, res){
 });
 
 app.post("/phrases", function (req, res){
-  console.log("made it to app.post")
-  var newPhrase = req.body.newPhrase;
+  var newPhrase = req.body;
   phrases.push(newPhrase);
-  console.log(newPhrase);
   res.send(newPhrase);
 });
 
