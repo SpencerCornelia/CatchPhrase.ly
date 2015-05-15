@@ -17,11 +17,16 @@ The app should hold an array of hard-coded phrases. This will serves as our "dat
 
 General Guidelines
 
-Start an express project with all the necessary requirements
-Create an index (home) page
-Serve up your static assets (html, css, js) in a public directory
+------Start an express project with all the necessary requirements
+
+------Create an index (home) page
+
+------Serve up your static assets (html, css, js) in a public directory
+
 Your '/phrases' route should return phrases as JSON
+
 Use AJAX to GET phrases
+
 Render the phrases on the index page using underscore templating
 
 

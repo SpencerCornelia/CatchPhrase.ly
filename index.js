@@ -1,4 +1,4 @@
-/*SERVER*/
+//SERVER
 
 //require all of our libraries
 //do all of our routing (app.get, app.listen)
@@ -45,9 +45,19 @@ app.get("/phrases", function (req, res){
 
 app.post("/phrases", function (req, res){
   var newPhrase = req.body;
+  newPhrase.id = phrases[phrases.length-1].id + 1;
   phrases.push(newPhrase);
-  res.send(newPhrase);
+  res.send(JSON.stringify(newPhrase));
 });
+
+app.delete("/phrases/:id", function (req, res) {
+  var targetId = parseInt(req.params.id); //last item is 4
+  var targetItem = _.findWhere(phrases, {id: targetId}); //returns phrase[clicked item]
+  var index = phrases.indexOf(targetItem); // is returning -1
+  phrases.slice(index,1);
+  console.log(phrases);
+  res.send(JSON.stringify(targetItem));
+})
 
 // listen on port 3000
 app.listen(3000, function (){

@@ -28,28 +28,30 @@
       <h1>Catchphrase.ly <small>Let's play CatchPhrase!</small></h1>
     </header>
     <!-- all phrases! -->
-    <ul class="list-group" id="phrase-ul">
-    </ul>
+
   </div>
 <div class="container">
-    <form class="form-inline" role="form" action="/phrases" method="POST">
+    <form class="form-inline" role="form" id="newPhrase">
         <div class="form-group">
             <label for="word">Word:</label>
-            <input type="text" class="form-control" id="email" placeholder="Enter Word">
+            <input type="text" name="word" class="form-control" id="newWord" placeholder="Enter Word">
         </div>
         <div class="form-group">
             <label for="definition">Definition:</label>
-            <input type="text" class="form-control" id="pwd" placeholder="Enter definition">
+            <input type="text" name="definition" class="form-control" id="definitions-input" placeholder="Enter definition">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
 </div> 
+    <ul class="list-group" id="phrase-ul">
+    </ul>
 </body>
   <!-- Underscore template -->
   <script type="text/template" id="phrases-template">
     <% _.each(collection, function(item){ %>
       <li class='list-group-item'><%= item.word %>
         <span class="label label-default"><%= item.definition%></span>
+        <button data-id="<%= item.id %>" onclick="Phrase.delete(this)" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </li>
     <% }); %>
   </script>
