@@ -5,10 +5,11 @@
 
 // REQUIREMENTS //
 var express = require("express"),
-    app = express(),
     path = require("path"),
     _ = require("underscore"),
-    bodyParser = require("body-parser");
+    bodyParser = require("body-parser"),
+    db = require("./models.js");
+var app = express();
 
 // CONFIG //
 
@@ -17,6 +18,7 @@ app.use(express.static(__dirname + '/public'));
 
 // body parser config
 app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(express.static("bower_components")); don't think I need?
 
 // DATA //
 
@@ -43,6 +45,15 @@ app.get("/phrases", function (req, res){
   res.send(JSON.stringify(phrases));
 });
 
+// app.get("/phrases", function (req, res){
+//   db.Catchphrase.find({},
+//     function (err, phrases) {
+//       res.send(200, phrases);
+//       console.log("made it to line 52 index.js");
+//     });
+// });
+
+
 app.post("/phrases", function (req, res){
   var newPhrase = req.body;
   newPhrase.id = phrases[phrases.length-1].id + 1;
@@ -50,14 +61,28 @@ app.post("/phrases", function (req, res){
   res.send(JSON.stringify(newPhrase));
 });
 
+// app.post("/phrases", function (req, res) {
+//   db.Catchphrase.create(req.body.phrases,
+//     function (err, phrases) {
+//       res.send(201, phrases);
+//     });
+// });
+
 app.delete("/phrases/:id", function (req, res) {
-  var targetId = parseInt(req.params.id); //last item is 4
+  var targetId = req.params.id; //last item is 4
   var targetItem = _.findWhere(phrases, {id: targetId}); //returns phrase[clicked item]
   var index = phrases.indexOf(targetItem); // is returning -1
-  phrases.slice(index,1);
-  console.log(phrases);
+  phrases.splice(index,1);
   res.send(JSON.stringify(targetItem));
-})
+});
+
+// app.delete("/phrases/:_id", function (req, res) {
+//   db.Catchphrase.findAndRemoveOne({
+//     _id: req.params._id
+//   }, function (err, phrases) {
+//     res.send(204); // NO CONTENT but OK!
+//   });
+// });
 
 // listen on port 3000
 app.listen(3000, function (){

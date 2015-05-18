@@ -18,9 +18,9 @@ $(function(){
 function View() {};
 View.render = function(items, parentId, templateId) {
   // render a template
-  var compile = _.template($("#" + templateId).html());
+  var template = _.template($("#" + templateId).html());
   // input data into template and append to parent
-  $("#" + parentId).html(compile({collection: items}));
+  $("#" + parentId).html(template({collection: items}));
 };
 
 View.init = function() {
@@ -46,7 +46,7 @@ Phrase.all = function() {
 };
 
 Phrase.create = function(wordParams) {
-  $.post("/phrases", wordParams).done(function(res){
+  $.post("/phrases", wordParams).done(function(res) {
     // once done, re-render all foods
     Phrase.all();
   }).done(function(res){
@@ -55,10 +55,10 @@ Phrase.create = function(wordParams) {
   });
 };
 
-Phrase.delete = function(word) {
-  var wordId = $(word).data().id;
+Phrase.delete = function(phrase) {
+  var phraseId = $(phrase).data().id;
   $.ajax({
-    url: '/phrases/' + wordId, // where does url link to??
+    url: '/phrases/' + phraseId, // phrases is the domain that we want to delete from
     type: 'DELETE',
     success: function(res) {
       // once successfull, re-render all foods
