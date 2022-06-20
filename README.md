@@ -5,7 +5,7 @@ This lab will span over the course of several days. The suggested workflow for e
 
 Day 3 / Weekend
 
-We will be building the last interation of the CatchPrase.ly App!
+We will be building the last iteration of the CatchPrase.ly App!
 
 Before you start, make sure you've completed Parts 1 & 2. You must have routes for Reading, Creating, and Deleting your data.
 
